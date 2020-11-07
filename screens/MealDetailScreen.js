@@ -1,12 +1,15 @@
 // food category --> meals inside category --> individual meals
 // food category
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Button } from 'react-native';
 
-const MealDetailScreen = () => {
+const MealDetailScreen = ({navigation}) => {
     return (
         <View style={styles.screen}>
             <Text>The Meal Detail Screen!</Text>
+            <Button title="go back to categories" onPress={() => {
+                navigation.popToTop()
+            }}/>
         </View>
     )
 }

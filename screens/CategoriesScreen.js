@@ -7,7 +7,7 @@ const CategoriesScreen = ({navigation}) => {
         <View style={styles.screen}>
             <Text>The Categories Screen!</Text>
             <Button title="Go to Meals!" onPress={() => {
-                navigation.navigate({routeName: "CategoryMeals"})
+                navigation.push("CategoryMeals")
             }} />
         </View>
     )

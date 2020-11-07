@@ -10,6 +10,9 @@ const CategoryMealScreen = () => {
             <Button title="Go to Meal Detail!" onPress={() => {
                 navigation.navigate({routeName: "MealDetail"})
             }} />
+            <Button title="Go back!" onPress={() => {
+                navigation.pop()
+            }} />
         </View>
     )
 }
