@@ -20,7 +20,14 @@ const CategoryMealScreen = (props) => {
         isVegan={itemData.item.isVegan}
         isVegetarian={itemData.item.isVegetarian}
         isLactoseFree={itemData.item.isLactoseFree}
-        onPress={() => {}}
+        onPress={() => {
+          props.navigation.navigate({
+            routeName: 'MealDetail',
+            params: {
+              mealId: itemData.item.id
+            }
+          })
+        }}
       />
     );
   };

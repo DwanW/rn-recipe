@@ -1,42 +1,41 @@
-import React, {useState} from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import * as Font from 'expo-font';
-import { AppLoading } from 'expo';
-import { enableScreens } from 'react-native-screens'
+import React, { useState } from "react";
+import { StyleSheet, Text, View } from "react-native";
+import * as Font from "expo-font";
+import { AppLoading } from "expo";
+import { enableScreens } from "react-native-screens";
 
-enableScreens()
+enableScreens();
 
-import MealsNavigator from './navigation/MealsNavigator';
+import MealsNavigator from "./navigation/MealsNavigator";
 
 const fetchFonts = () => {
   return Font.loadAsync({
-    'open-sans': require('./assets/fonts/OpenSans-Regular.ttf'),
-    'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf')
-  })
-}
+    "open-sans": require("./assets/fonts/OpenSans-Regular.ttf"),
+    "open-sans-bold": require("./assets/fonts/OpenSans-Bold.ttf")
+  });
+};
 
 export default function App() {
-  const [fontLoaded, setFontLoaded] = useState(false)
+  const [fontLoaded, setFontLoaded] = useState(false);
 
-  if(!fontLoaded){
+  if (!fontLoaded) {
     return (
-      <AppLoading 
+      <AppLoading
         startAsync={fetchFonts}
         onFinish={() => setFontLoaded(true)}
+        onError={(err) => console.log(ErrorEvent)}
       />
-    )
+    );
   }
-  
-  return (
-    <MealsNavigator />
-  );
+
+  return <MealsNavigator />;
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

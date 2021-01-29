@@ -32,13 +32,14 @@ const styles = StyleSheet.create({
     flex: 1,
     margin: 10,
     height: 120,
+    elevation: 5
   },
   container: {
     flex: 1,
     borderRadius: 10,
     shadowColor: "black",
     shadowOpacity: 0.2,
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: { width: 2, height: 2 },
     shadowRadius: 10,
     padding: 15,
     justifyContent: "flex-end",
