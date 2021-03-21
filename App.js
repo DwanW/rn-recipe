@@ -6,7 +6,7 @@ import { Provider as PaperProvider } from "react-native-paper";
 import { theme } from "./constants/theme";
 
 import MealsNavigator from "./navigation/MealsNavigator";
-import { FavoriteProvider } from "./utils/context";
+import { FavoriteProvider, SettingProvider } from "./utils/context";
 
 enableScreens();
 
@@ -30,10 +30,12 @@ export default function App() {
   }
 
   return (
-    <PaperProvider theme={theme}>
-      <FavoriteProvider>
-        <MealsNavigator />
-      </FavoriteProvider>
-    </PaperProvider>
+    <SettingProvider>
+      <PaperProvider theme={theme}>
+        <FavoriteProvider>
+          <MealsNavigator />
+        </FavoriteProvider>
+      </PaperProvider>
+    </SettingProvider>
   );
 }

@@ -1,16 +1,35 @@
 import React, { createContext } from "react";
-import { useFavorites } from "./hook";
+import { useFavorites, useSettings } from "./hook";
+
+// favorites wrapper
 
 const favoriteMealInitialState = [];
 
 const favoritesContext = createContext(favoriteMealInitialState);
 
-const { Provider } = favoritesContext;
+const { Provider: FavProvider } = favoritesContext;
 
 const FavoriteProvider = ({ children }) => {
   const [favMeals, setFavMeals] = useFavorites();
 
-  return <Provider value={{ favMeals, setFavMeals }}>{children}</Provider>;
+  return (
+    <FavProvider value={{ favMeals, setFavMeals }}>{children}</FavProvider>
+  );
 };
 
-export { FavoriteProvider, favoritesContext };
+// settings wrapper
+
+const settingsInitialState = [];
+
+const settingsContext = createContext(settingsInitialState);
+
+const { Provider: SetProvider } = settingsContext;
+
+const SettingProvider = ({ children }) => {
+  const [settings, setSettings] = useSettings();
+  return (
+    <SetProvider value={{ settings, setSettings }}>{children}</SetProvider>
+  );
+};
+
+export { FavoriteProvider, favoritesContext, SettingProvider, settingsContext };

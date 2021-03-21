@@ -7,7 +7,7 @@ const MealList = ({ navigation, listData }) => {
   if (listData.length === 0) {
     return (
       <View>
-        <Text> you have no favorite added yet</Text>
+        <Text>No Item Found</Text>
       </View>
     );
   }

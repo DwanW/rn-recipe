@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import { favoritesContext } from "../utils/context";
-import { toggleFavorites } from "../utils/storage";
+import { toggleFavorites } from "../utils/favorites";
 import CustomHeaderButton from "./HeaderButton";
 
 export default function MealDetailHeader({ selectedMeal }) {
