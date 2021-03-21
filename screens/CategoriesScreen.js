@@ -29,7 +29,7 @@ const CategoriesScreen = ({ navigation }) => {
       keyExtractor={(item, index) => item.id}
       data={CATEGORIES}
       renderItem={renderGridItem}
-      numColumns={2}
+      numColumns={1}
     />
   );
 };

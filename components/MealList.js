@@ -6,7 +6,7 @@ import MealItem from "./MealItem";
 const MealList = ({ navigation, listData }) => {
   if (listData.length === 0) {
     return (
-      <View>
+      <View style={styles.list}>
         <Text>No Item Found</Text>
       </View>
     );

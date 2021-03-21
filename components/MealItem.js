@@ -61,7 +61,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     justifyContent: 'space-between',
     alignItems: 'center',
-    height: '15%'
+    height: '15%',
+    fontSize: 40
   },
   titleContainer: {
     backgroundColor: 'rgba(0,0,0,0.5)',
