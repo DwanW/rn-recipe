@@ -1,17 +1,19 @@
-import React, { useState } from 'react';
-import { Text, View } from 'react-native';
-import * as Font from 'expo-font';
-import { AppLoading } from 'expo';
-import { useScreens } from 'react-native-screens';
+import React, { useState } from "react";
+import * as Font from "expo-font";
+import { AppLoading } from "expo";
+import { enableScreens } from "react-native-screens";
+import { Provider as PaperProvider } from "react-native-paper";
+import { theme } from "./constants/theme";
 
-import MealsNavigator from './navigation/MealsNavigator';
+import MealsNavigator from "./navigation/MealsNavigator";
+import { FavoriteProvider } from "./utils/context";
 
-useScreens();
+enableScreens();
 
 const fetchFonts = () => {
   return Font.loadAsync({
-    'open-sans': require('./assets/fonts/OpenSans-Regular.ttf'),
-    'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf')
+    "open-sans": require("./assets/fonts/OpenSans-Regular.ttf"),
+    "open-sans-bold": require("./assets/fonts/OpenSans-Bold.ttf"),
   });
 };
 
@@ -27,5 +29,11 @@ export default function App() {
     );
   }
 
-  return <MealsNavigator />;
+  return (
+    <PaperProvider theme={theme}>
+      <FavoriteProvider>
+        <MealsNavigator />
+      </FavoriteProvider>
+    </PaperProvider>
+  );
 }

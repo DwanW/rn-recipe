@@ -1,23 +1,31 @@
-import React from 'react';
-import { View, FlatList, StyleSheet } from 'react-native';
+import React from "react";
+import { View, FlatList, StyleSheet, Text } from "react-native";
 
-import MealItem from './MealItem';
+import MealItem from "./MealItem";
 
-const MealList = props => {
-  const renderMealItem = itemData => {
+const MealList = ({ navigation, listData }) => {
+  if (listData.length === 0) {
+    return (
+      <View>
+        <Text> you have no favorite added yet</Text>
+      </View>
+    );
+  }
+
+  const renderMealItem = ({ item }) => {
     return (
       <MealItem
-        title={itemData.item.title}
-        image={itemData.item.imageUrl}
-        duration={itemData.item.duration}
-        complexity={itemData.item.complexity}
-        affordability={itemData.item.affordability}
+        title={item.title}
+        image={item.imageUrl}
+        duration={item.duration}
+        complexity={item.complexity}
+        affordability={item.affordability}
         onSelectMeal={() => {
-          props.navigation.navigate({
-            routeName: 'MealDetail',
+          navigation.navigate({
+            routeName: "MealDetail",
             params: {
-              mealId: itemData.item.id
-            }
+              mealId: item.id,
+            },
           });
         }}
       />
@@ -27,10 +35,10 @@ const MealList = props => {
   return (
     <View style={styles.list}>
       <FlatList
-        data={props.listData}
-        keyExtractor={(item, index) => item.id}
+        data={listData}
+        keyExtractor={(item) => item.id}
         renderItem={renderMealItem}
-        style={{ width: '100%' }}
+        style={{ width: "100%" }}
       />
     </View>
   );
@@ -39,10 +47,10 @@ const MealList = props => {
 const styles = StyleSheet.create({
   list: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 15
-  }
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 15,
+  },
 });
 
 export default MealList;

@@ -1,30 +1,28 @@
-import React from 'react';
+import React from "react";
 import {
   TouchableOpacity,
   View,
   Text,
   StyleSheet,
   Platform,
-  TouchableNativeFeedback
-} from 'react-native';
+  TouchableNativeFeedback,
+} from "react-native";
 
-const CategoryGridTile = props => {
-  let TouchableCmp = TouchableOpacity;
+const CategoryGridTile = ({ title, color, onSelect }) => {
+  let TouchableComponent = TouchableOpacity;
 
-  if (Platform.OS === 'android' && Platform.Version >= 21) {
-    TouchableCmp = TouchableNativeFeedback;
+  if (Platform.OS === "android" && Platform.Version >= 21) {
+    TouchableComponent = TouchableNativeFeedback;
   }
   return (
     <View style={styles.gridItem}>
-      <TouchableCmp style={{ flex: 1 }} onPress={props.onSelect}>
-        <View
-          style={{ ...styles.container, ...{ backgroundColor: props.color } }}
-        >
+      <TouchableComponent style={{ flex: 1 }} onPress={onSelect}>
+        <View style={{ ...styles.container, ...{ backgroundColor: color } }}>
           <Text style={styles.title} numberOfLines={2}>
-            {props.title}
+            {title}
           </Text>
         </View>
-      </TouchableCmp>
+      </TouchableComponent>
     </View>
   );
 };
@@ -36,27 +34,27 @@ const styles = StyleSheet.create({
     height: 150,
     borderRadius: 10,
     overflow:
-      Platform.OS === 'android' && Platform.Version >= 21
-        ? 'hidden'
-        : 'visible',
-    elevation: 5
+      Platform.OS === "android" && Platform.Version >= 21
+        ? "hidden"
+        : "visible",
+    elevation: 5,
   },
   container: {
     flex: 1,
     borderRadius: 10,
-    shadowColor: 'black',
+    shadowColor: "black",
     shadowOpacity: 0.26,
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 10,
     padding: 15,
-    justifyContent: 'flex-end',
-    alignItems: 'flex-end'
+    justifyContent: "flex-end",
+    alignItems: "flex-end",
   },
   title: {
-    fontFamily: 'open-sans-bold',
+    fontFamily: "open-sans-bold",
     fontSize: 22,
-    textAlign: 'right'
-  }
+    textAlign: "right",
+  },
 });
 
 export default CategoryGridTile;

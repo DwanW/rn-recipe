@@ -1,92 +1,91 @@
-import React from 'react';
-import {
-  ScrollView,
-  View,
-  Image,
-  Text,
-  Button,
-  StyleSheet
-} from 'react-native';
-import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+import React from "react";
+import { ScrollView, View, Image, Text, StyleSheet } from "react-native";
 
-import { MEALS } from '../data/dummy-data';
-import HeaderButton from '../components/HeaderButton';
-import DefaultText from '../components/DefaultText';
+import { MEALS } from "../data/dummy-data";
+import DefaultText from "../components/DefaultText";
+import MealDetailHeader from "../components/MealDetailHeader";
 
-const ListItem = props => {
+const ListItem = ({ children }) => {
   return (
     <View style={styles.listItem}>
-      <DefaultText>{props.children}</DefaultText>
+      <DefaultText>{children}</DefaultText>
     </View>
   );
 };
 
-const MealDetailScreen = props => {
-  const mealId = props.navigation.getParam('mealId');
+const MealDetailScreen = ({ navigation }) => {
+  const mealId = navigation.getParam("mealId");
 
-  const selectedMeal = MEALS.find(meal => meal.id === mealId);
+  const selectedMeal = MEALS.find((meal) => meal.id === mealId);
+
+  if (!selectedMeal) {
+    return (
+      <View>
+        <Text>An Error Occurred while getting the Item</Text>
+      </View>
+    );
+  }
+
+  const {
+    imageUrl,
+    duration,
+    complexity,
+    affordability,
+    ingredients,
+    steps,
+  } = selectedMeal;
 
   return (
     <ScrollView>
-      <Image source={{ uri: selectedMeal.imageUrl }} style={styles.image} />
+      <Image source={{ uri: imageUrl }} style={styles.image} />
       <View style={styles.details}>
-        <DefaultText>{selectedMeal.duration}m</DefaultText>
-        <DefaultText>{selectedMeal.complexity.toUpperCase()}</DefaultText>
-        <DefaultText>{selectedMeal.affordability.toUpperCase()}</DefaultText>
+        <DefaultText>{duration}m</DefaultText>
+        <DefaultText>{complexity.toUpperCase()}</DefaultText>
+        <DefaultText>{affordability.toUpperCase()}</DefaultText>
       </View>
       <Text style={styles.title}>Ingredients</Text>
-      {selectedMeal.ingredients.map(ingredient => (
+      {ingredients.map((ingredient) => (
         <ListItem key={ingredient}>{ingredient}</ListItem>
       ))}
       <Text style={styles.title}>Steps</Text>
-      {selectedMeal.steps.map(step => (
+      {steps.map((step) => (
         <ListItem key={step}>{step}</ListItem>
       ))}
     </ScrollView>
   );
 };
 
-MealDetailScreen.navigationOptions = navigationData => {
-  const mealId = navigationData.navigation.getParam('mealId');
-  const selectedMeal = MEALS.find(meal => meal.id === mealId);
+MealDetailScreen.navigationOptions = ({ navigation }) => {
+  const mealId = navigation.getParam("mealId");
+  const selectedMeal = MEALS.find((meal) => meal.id === mealId);
   return {
     headerTitle: selectedMeal.title,
-    headerRight: (
-      <HeaderButtons HeaderButtonComponent={HeaderButton}>
-        <Item
-          title="Favorite"
-          iconName="ios-star"
-          onPress={() => {
-            console.log('Mark as favorite!');
-          }}
-        />
-      </HeaderButtons>
-    )
+    headerRight: <MealDetailHeader selectedMeal={selectedMeal} />,
   };
 };
 
 const styles = StyleSheet.create({
   image: {
-    width: '100%',
-    height: 200
+    width: "100%",
+    height: 200,
   },
   details: {
-    flexDirection: 'row',
+    flexDirection: "row",
     padding: 15,
-    justifyContent: 'space-around'
+    justifyContent: "space-around",
   },
   title: {
-    fontFamily: 'open-sans-bold',
+    fontFamily: "open-sans-bold",
     fontSize: 22,
-    textAlign: 'center'
+    textAlign: "center",
   },
   listItem: {
     marginVertical: 10,
     marginHorizontal: 20,
-    borderColor: '#ccc',
+    borderColor: "#ccc",
     borderWidth: 1,
-    padding: 10
-  }
+    padding: 10,
+  },
 });
 
 export default MealDetailScreen;
